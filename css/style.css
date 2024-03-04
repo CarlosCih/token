@@ -67,3 +67,68 @@ body {
     text-align: center;
     margin-top: 20px;
 }
+
+#generate-token-form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 40px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+#generate-token-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333333;
+}
+
+#generate-token-form input[type="email"],
+#generate-token-form input[type="password"] {
+    width: calc(100% - 40px); /* Resta el padding del ancho */
+    padding: 15px 20px;
+    margin: 0 auto; /* Centra horizontalmente */
+    margin-bottom: 20px;
+    border: 1px solid #cccccc;
+    border-radius: 25px;
+    background-color: #f7f7f7;
+    font-size: 16px;
+    color: #333333;
+    text-align: center; /* Alinea el texto al centro */
+    transition: border-color 0.3s ease;
+}
+
+#generate-token-form input[type="email"]:focus{
+    outline: none;
+    border-color: #007bff;
+}
+
+#generate-token-form button {
+    width: 100%;
+    padding: 15px;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+}
+#generated-token {
+    width: calc(100% - 40px); /* Resta el padding del ancho */
+    padding: 15px 20px;
+    margin: 0 auto; /* Centra horizontalmente */
+    margin-bottom: 20px;
+    border: 1px solid #cccccc00;
+    border-radius: 25px;
+    background-color: #f7f7f700;
+    font-size: 16px;
+    color: #333333;
+    text-align: center; /* Alinea el texto al centro */
+    transition: border-color 0.3s ease;
+}
+
+
+#generate-token-formbutton:hover {
+    background-color: #0056b3;
+}

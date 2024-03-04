@@ -1,37 +1,65 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Coloca tu código aquí
+    var generateTokenForm = document.getElementById('generate-token-form');
     var loginForm = document.getElementById('login-form');
+
+    if (generateTokenForm) {
+        generateTokenForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            // Generar un token aleatorio
+            var token = generateRandomToken();
+            console.log('Token generado:', token);
+
+            // Mostrar el token generado en el div
+            document.getElementById('generated-token').innerText = 'Token generado: ' + token;
+        });
+    }
+
     if (loginForm) {
         loginForm.addEventListener('submit', function(event) {
             event.preventDefault();
             
-            var username = document.getElementById('username').value;
-            var password = document.getElementById('password').value;
+            var token = document.getElementById('token').value;
 
             fetch('php/login.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },
-                body: 'username=' + encodeURIComponent(username) + '&password=' + encodeURIComponent(password),
+                body: 'token=' + encodeURIComponent(token),
             })
             .then(response => {
                 if (response.ok) {
-                    return response.json();
+                    // El inicio de sesión fue exitoso, redirigir al dashboard
+                    window.location.href = 'html/dashboard.html';
                 } else {
-                    throw new Error('Credenciales inválidas');
+                    // El token es inválido, mostrar un mensaje de error al usuario
+                    throw new Error('Token inválido');
                 }
             })
-            .then(data => {
-                localStorage.setItem('token', data.token);
-                window.location.href = 'html/dashboard.html'; // Redirigir al dashboard
-            })
             .catch(error => {
-                document.getElementById('error-message').textContent = error.message;
+                // Manejar errores de red u otros errores de inicio de sesión
+                console.error('Error al iniciar sesión:', error);
             });
+            // Por ahora, simplemente mostramos un mensaje en la consola
+            console.log('Iniciando sesión con token:', token);
+
+            localStorage.setItem('token', token); // Guardar el token en el almacenamiento local
+
         });
     }
 });
+
+function generateRandomToken() {
+    // Generar un token aleatorio (aquí puedes utilizar tu propia lógica de generación de token)
+    var tokenLength = 10;
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var token = '';
+    for (var i = 0; i < tokenLength; i++) {
+        token += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    return token;
+}
 
 function redirectToLogin() {
     localStorage.removeItem('token'); // Eliminar el token almacenado

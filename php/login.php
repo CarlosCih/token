@@ -1,21 +1,17 @@
 <?php
-// Credenciales de usuario (simulado)
-$valid_username = 'carlos';
-$valid_password = '12345';
+// Manejar la solicitud de inicio de sesión con token
+$token = $_POST['token']; // Obtener el token proporcionado por el usuario
 
-// Verificar las credenciales
-$username = $_POST['username'];
-$password = $_POST['password'];
-
-if ($username === $valid_username && $password === $valid_password) {
-    // Generar token
-    $payload = array(
-        "username" => $username
-    );
-    $token = base64_encode(json_encode($payload));
-    echo json_encode(array("token" => $token));
+// Validar el token (aquí deberías tener tu lógica de validación)
+if ($token === "token_valido") {
+    // Token válido, autenticar al usuario (puedes generar un token de sesión aquí si lo necesitas)
+    $response = array('success' => true);
 } else {
-    http_response_code(401);
-    echo json_encode(array("message" => "Credenciales inválidas"));
+    // Token inválido, devolver un mensaje de error
+    $response = array('success' => false, 'error' => 'Token inválido');
 }
+
+// Devolver la respuesta en formato JSON
+header('Content-Type: application/json');
+echo json_encode($response);
 ?>

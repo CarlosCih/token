@@ -8,11 +8,19 @@
 </head>
 <body>
     <div class="login-container">
+        <form id="generate-token-form">
+            <h2>Generar Token</h2>
+            <div id="generated-token"></div>
+            <button type="submit">Generar Token</button>
+        </form>
+    </div>
+
+    <hr>
+    <div class="login-container">
         <form id="login-form">
-            <h2>Login</h2>
-            <input type="text" id="username" placeholder="Username" required>
-            <input type="password" id="password" placeholder="Password" required>
-            <button type="submit">Login</button>
+            <h2>Iniciar sesión con Token</h2>
+            <input type="text" id="token" placeholder="Token" required>
+            <button type="submit">Iniciar sesión</button>
         </form>
         <p id="error-message" class="error-message"></p>
     </div>
