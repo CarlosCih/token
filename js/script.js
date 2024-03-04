@@ -12,6 +12,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Mostrar el token generado en el div
             document.getElementById('generated-token').innerText = 'Token generado: ' + token;
+
+            // Guardar el token generado en una variable global
+            window.generatedToken = token;
         });
     }
 
@@ -20,34 +23,21 @@ document.addEventListener('DOMContentLoaded', function() {
             event.preventDefault();
             
             var token = document.getElementById('token').value;
-
-            fetch('php/login.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: 'token=' + encodeURIComponent(token),
-            })
-            .then(response => {
-                if (response.ok) {
-                    // El inicio de sesión fue exitoso, redirigir al dashboard
-                    window.location.href = 'html/dashboard.html';
-                } else {
-                    // El token es inválido, mostrar un mensaje de error al usuario
-                    throw new Error('Token inválido');
-                }
-            })
-            .catch(error => {
-                // Manejar errores de red u otros errores de inicio de sesión
-                console.error('Error al iniciar sesión:', error);
-            });
-            // Por ahora, simplemente mostramos un mensaje en la consola
-            console.log('Iniciando sesión con token:', token);
-
-            localStorage.setItem('token', token); // Guardar el token en el almacenamiento local
-
+    
+            // Validar el token ingresado con el token generado
+            if (token === window.generatedToken) {
+                // Guardar el token en el almacenamiento local
+                localStorage.setItem('token', token);
+                
+                // Redirigir al dashboard
+                window.location.href = 'html/dashboard.html';
+            } else {
+                // Mostrar mensaje de error si el token no coincide con el generado
+                document.getElementById('error-message').textContent = 'Token inválido';
+            }
         });
     }
+    
 });
 
 function generateRandomToken() {
@@ -60,6 +50,8 @@ function generateRandomToken() {
     }
     return token;
 }
+
+
 
 function redirectToLogin() {
     localStorage.removeItem('token'); // Eliminar el token almacenado
