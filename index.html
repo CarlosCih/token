@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="login-container">
+<!--     <div class="login-container">
         <form id="generate-token-form">
             <h2>Generar Token</h2>
             <div id="generated-token"></div>
@@ -15,11 +15,12 @@
         </form>
     </div>
 
-    <hr>
+    <hr> -->
     <div class="login-container">
-        <form id="login-form">
+        <form id="login-form" action="php/servicios.php" method="post">
             <h2>Iniciar sesión con Token</h2>
-            <input type="text" id="token" placeholder="Token" required>
+            <input type="text" id="usuario" name="usuario" placeholder="Usuario" required>
+            <input type="password" id="password" name="contrasena" placeholder="Contraseña" required>
             <button type="submit">Iniciar sesión</button>
         </form>
         <p id="error-message" class="error-message"></p>

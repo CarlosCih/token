@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+/* document.addEventListener('DOMContentLoaded', function() {
     var generateTokenForm = document.getElementById('generate-token-form');
     var loginForm = document.getElementById('login-form');
 
@@ -50,10 +50,19 @@ function generateRandomToken() {
     }
     return token;
 }
+ */
 
-
-
-function redirectToLogin() {
-    localStorage.removeItem('token'); // Eliminar el token almacenado
-    window.location.href = '../index.html'; // Redirigir al login
+// Verifica si hay un parámetro de error en la URL
+const urlParams = new URLSearchParams(window.location.search);
+const error = urlParams.get("error");
+if (error === "1") {
+  // Si hay un error, muestra una alerta de Windows
+  alert("Credenciales incorrectas. Por favor, inténtalo de nuevo.");
 }
+
+document.getElementById("regresarLogin").addEventListener("click", function () {
+  // Eliminar el token almacenado en el localStorage
+  localStorage.removeItem("token");
+  // Redirigir al usuario al login
+  window.location.href = "logout.php";
+});
