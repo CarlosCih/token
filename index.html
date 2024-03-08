@@ -17,9 +17,9 @@
 
     <hr> -->
     <div class="login-container">
-        <form id="login-form" action="php/servicios.php" method="post">
+        <form id="login-form" action="php/servicios.php" method="post" onsubmit="validarFormulario()">
             <h2>Iniciar sesión con Token</h2>
-            <input type="text" id="usuario" name="usuario" placeholder="Usuario" required>
+            <input type="text" id="usuario" name="usuario" placeholder="Usuario" required pattern="^\S.*$">
             <input type="password" id="password" name="contrasena" placeholder="Contraseña" required>
             <button type="submit">Iniciar sesión</button>
         </form>

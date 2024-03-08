@@ -51,6 +51,17 @@ function generateRandomToken() {
     return token;
 }
  */
+function validarFormulario() {
+    // Obtener el valor del campo de usuario
+    var usuario = document.getElementById("usuario").value;
+
+    // Verificar si el campo de usuario contiene solo espacios en blanco
+    if (usuario === " ") {
+        alert("El campo de usuario no puede estar vacío.");
+        return false; // Detener el envío del formulario
+    }
+    return true; // Permitir el envío del formulario si el campo de usuario es válido
+}
 
 // Verifica si hay un parámetro de error en la URL
 const urlParams = new URLSearchParams(window.location.search);
